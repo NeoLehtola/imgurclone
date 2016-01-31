@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Imagez!</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-app="imagez" ng-controller="MainCtrl">
+    <h1>Load and comment images</h1>
+    <!--<div>
+     <form>
+        <input type="file" name="pic" accept="image/*">
+        <input type="submit">
+      </form>
+    </div>-->
+    <div>
+      <input ng-model="imageurl" type="url"></input>
+      <button ng-click="loadimage()" type="button">Load Image</button>     
+    </div>
+    <div>
+      <img ng-src="{{image.path}}" style="width: {{image.width}}px; height: {{image.height}}px"></img>
+    </div>
+  </body>
+</html>
