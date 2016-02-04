@@ -1,8 +1,14 @@
 var app = angular.module('imagez', []);
 
+app.factory('images', [function() {
+  var o = { images: [] };
+  return o;
+}]);
+
 app.controller('MainCtrl', [
-'$scope',
-function($scope) {
+'$scope', 'images',
+function($scope, images) {
+  $scope.images = images.images;
   $scope.image = {
     path: "",
     width: 0,
@@ -15,9 +21,16 @@ function($scope) {
         $scope.image.width = img.width;
         $scope.image.height = img.height;
         $scope.image.path = $scope.imageurl;
+       
       });
     }
+    
     img.src = $scope.imageurl;
+    $scope.images.push(img);
+  }
+
+  $scope.enlargeimage = function(img) {
+    
   }
 
 }]);
