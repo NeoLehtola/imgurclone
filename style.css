@@ -4,15 +4,15 @@ h1 {
 }
 
 .loadimage {
-  border: 10px solid white;
+  border: 20px solid white;
 }
 
 .cropped {
   object-fit: cover;
   object-position: center;
   float: left;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   margin-left: 1%;
   margin-right: 1%;
   margin-bottom: 0.5em;
