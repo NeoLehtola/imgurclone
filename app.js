@@ -1,34 +1,50 @@
-var app = angular.module('imagez', []);
+var app = angular.module('imagez', ['ui.router']);
 
+app.config([
+'$stateProvider',
+'$urlRouterProvider',
+function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('home', {
+      url: '/home',
+      templateUrl: '/home.html',
+      controller: 'MainCtrl'
+    })
+    .state('image', {
+       url: '/image/{id}',
+       templateUrl: '/image.html',
+       controller: 'ImageCtrl'
+    });
+  $urlRouterProvider.otherwise('home');
 
+}]);
 
 app.factory('images', [function() {
   var o = { images: [] };
   return o;
 }]);
 
+
 app.controller('MainCtrl', [
 '$scope', 'images',
 function($scope, images) {
   $scope.images = images.images;
-
   $scope.loadimage = function() {
     var img = new Image();
     
     img.src = $scope.imageurl;
-    $scope.images.push(img);
+    $scope.images.push({
+      img: img,
+      comments: []
+    });
   }
 }]);
 
 app.controller('ImageCtrl', [
- '$scope', 'images',
-  function($scope, images, $http, $routeParams) {
+ '$scope', '$stateParams', 'images',
+  function($scope, $stateParams, images) {
     $scope.images = images.images;
-    $scope.image = {
-      path: "",
-      width: 0,
-      height: 0
-    }
+    $scope.image = images.images[$stateParams.id];
     $scope.enlargeimage = function(img) {
  
       img.onload = function() {
@@ -39,7 +55,14 @@ app.controller('ImageCtrl', [
        
       });
       img.src = $scope.imageurl;
+      }
     }
+    $scope.addComment = function() {
+      if ($scope.body === '') { return; }
+      $scope.image.comments.push({
+        body: $scope.body,
+        author: $scope.author
+      });
+      $scope.body = '';  
     }
-
 }]);

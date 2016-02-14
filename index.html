@@ -7,16 +7,20 @@
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
     <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"</script>-->
     <script src="app.js"></script>
-
   </head>
-  <body ng-app="imagez" ng-controller="MainCtrl">
+  <body ng-app="imagez">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <h1>Load and comment images</h1>
-        <!--<div>
+       <ui-view></ui-view>
+      </div>
+    </div>
+
+  <script type="text/ng-template" id="/home.html">
+    <h1>Load and comment images</h1>
+      <!--<div>
          <form>
             <input type="file" name="pic" accept="image/*">
             <input type="submit">
@@ -27,11 +31,36 @@
           <button ng-click="loadimage()" class="btn btn-primary" type="button">Load Image</button>     
         </div>
         <div ng-repeat="image in images">
-          <img class="cropped" ng-src="{{image.src}}">
-         <!--<img ng-src="{{image.src}}" style="width: {{image.width}}px; height: {{image.height}}px"></img>-->
+         <a href="#/image/{{$index}}"> <img class="cropped img-thumbnail" ng-src="{{image.img.src}}"></a>
+
         </div>
-        <p style="clear: both;">
-      </div>
+        <p style="clear: both;"> 
+  </script>
+  <script type="text/ng-template" id="/image.html">
+    <h1>Load and comment images</h1>
+    <img class="full center-block img-rounded" ng-src="{{image.img.src}}"  style="width: {{image.img.width}}px; height: {{image.img.height}}px"></img> 
+
+  <form ng-submit="addComment()"
+    class="comment-form"
+    style="margin-top:30px;">
+    <h4>Add a comment</h4>
+    <div class="form-group">
+      <input type="text"
+      placeholder="Comment"
+      class="form-control"
+      ng-model="body"></input>
+      <input type="text"
+      placeholder="Author"
+      class="form-control"
+      ng-model="author"></input>
     </div>
+    <button type="submit" class="btn btn-primary">Post comment</button>
+  </form>
+  <h4 class="comments">Comments:</h4>
+  <div ng-repeat="comment in image.comments" class="comments">
+    {{comment.author}}: {{comment.body}}
+  </div>  
+
+  </script>
   </body>
 </html>
