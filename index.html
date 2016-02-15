@@ -56,8 +56,8 @@
     </div>
     <button type="submit" class="btn btn-primary">Post comment</button>
   </form>
-  <h4 class="comments">Comments:</h4>
-  <div ng-repeat="comment in image.comments" class="comments">
+  <h4 class="comment-title">Comments:</h4>
+  <div ng-repeat="comment in image.comments" class="comments well well-sm" style="width: 400px;">
     {{comment.author}}: {{comment.body}}
   </div>  
 

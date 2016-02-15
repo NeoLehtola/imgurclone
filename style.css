@@ -28,7 +28,14 @@ h1 {
   margin: 0 auto; 
 }
 
+.comment-title {
+  text-align:center;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 .comments {
   text-align:center;
-  margin-top: 30px;
+  margin: 0 auto;
 }
